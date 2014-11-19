@@ -17,4 +17,11 @@ class PartyTest < UnitTest
     party = Party.new timetable: DateRange.new(start_datetime, finish_datetime)
     assert_equal({start_datetime: start_datetime, finish_datetime: finish_datetime}, party)
   end
+
+  def test_can_read_party_timetable
+    start_datetime = DateTime.new(2014,11,20)
+    finish_datetime = DateTime.new(2014,11,21)
+    party = Party.new start_datetime: start_datetime, finish_datetime: finish_datetime
+    assert_equal DateRange.new(start_datetime, finish_datetime), party.timetable
+  end
 end

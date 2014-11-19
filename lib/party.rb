@@ -18,6 +18,10 @@ class Party < Hash
     self.merge! date_range
   end
 
+  def timetable
+    DateRange.new fetch(:start_datetime), fetch(:finish_datetime)
+  end
+
   private
 
   def ticket_fractional=(fractional)
@@ -34,5 +38,13 @@ class Party < Hash
 
   def ticket_currency
     fetch :ticket_currency
+  end
+
+  def start_datetime=(start_datetime)
+    self[:start_datetime] = start_datetime
+  end
+
+  def finish_datetime=(finish_datetime)
+    self[:finish_datetime] = finish_datetime
   end
 end
