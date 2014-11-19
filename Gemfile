@@ -19,6 +19,7 @@ gem 'erubis', '~> 2.7.0'
 gem 'mysql2'
 gem 'sequel'
 gem 'bcrypt'
+gem 'money'
 
 # Test requirements
 gem 'minitest', :require => 'minitest/autorun', :group => 'test'
