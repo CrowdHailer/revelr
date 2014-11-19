@@ -18,10 +18,12 @@ gem 'sass'
 gem 'erubis', '~> 2.7.0'
 gem 'mysql2'
 gem 'sequel'
+gem 'bcrypt'
 
 # Test requirements
 gem 'minitest', :require => 'minitest/autorun', :group => 'test'
 gem 'rack-test', :require => 'rack/test', :group => 'test'
+gem 'factory_girl', :group => 'test'
 
 # Padrino Stable Gem
 gem 'padrino', '0.12.4'
