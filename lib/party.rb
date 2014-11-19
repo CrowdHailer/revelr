@@ -14,6 +14,10 @@ class Party < Hash
     Money.new(ticket_fractional, ticket_currency)
   end
 
+  def timetable=(date_range)
+    self.merge! date_range
+  end
+
   private
 
   def ticket_fractional=(fractional)

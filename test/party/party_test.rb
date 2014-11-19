@@ -10,4 +10,11 @@ class PartyTest < UnitTest
     party = Party.new ticket_fractional: 1200, ticket_currency: 'bhd'
     assert_equal Money.new(1200, 'bhd'), party.ticket_price
   end
+
+  def test_party_can_save_timetable
+    start_datetime = DateTime.new(2014,11,20)
+    finish_datetime = DateTime.new(2014,11,21)
+    party = Party.new timetable: DateRange.new(start_datetime, finish_datetime)
+    assert_equal({start_datetime: start_datetime, finish_datetime: finish_datetime}, party)
+  end
 end
