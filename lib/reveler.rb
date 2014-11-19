@@ -21,8 +21,12 @@ class Reveler < Hash
     self.crypted_password = BCrypt::Password.create(password).to_s    
   end
 
-  def check_password(candidate)
-    password == candidate
+  def authenticate(candidate)
+    check_password(candidate) && record_login
+  end
+
+  def last_login_at
+    self.fetch(:last_login_at, nil)
   end
 
   def banned?
@@ -49,5 +53,13 @@ class Reveler < Hash
 
   def crypted_password=(crypted_password)
     self[:crypted_password] = crypted_password
+  end
+
+  def check_password(candidate)
+    password == candidate
+  end
+
+  def record_login
+    self[:last_login_at] = DateTime.now
   end
 end

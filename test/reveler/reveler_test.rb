@@ -41,8 +41,22 @@ class RevelerTest < UnitTest
     assert_equal BCrypt::Password, reveler.password.class
   end
 
-  def test_can_check_password
+  def test_can_authenticate
     reveler = Reveler.new password: password
-    assert reveler.check_password(password), 'Password should check true'
+    assert reveler.authenticate(password), 'Password should check true'
+  end
+
+  def test_successful_authentication_saves_login_time
+    reveler = Reveler.new password: password
+    DateTime.stub :now, DateTime.new(1999) do
+      reveler.authenticate(password)
+    end
+    assert_equal DateTime.new(1999), reveler.last_login_at
+  end
+
+  def test_failed_authentication_does_not_record_login
+    reveler = Reveler.new password: password
+    reveler.authenticate('')
+    assert_nil reveler.last_login_at, 'Should not have recorded a login'
   end
 end
