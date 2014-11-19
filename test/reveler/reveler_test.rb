@@ -42,12 +42,12 @@ class RevelerTest < UnitTest
   end
 
   def test_can_authenticate
-    reveler = Reveler.new password: password
+    reveler = build :reveler
     assert reveler.authenticate(password), 'Password should check true'
   end
 
   def test_successful_authentication_saves_login_time
-    reveler = Reveler.new password: password
+    reveler = build :reveler
     DateTime.stub :now, DateTime.new(1999) do
       reveler.authenticate(password)
     end
@@ -55,7 +55,7 @@ class RevelerTest < UnitTest
   end
 
   def test_failed_authentication_does_not_record_login
-    reveler = Reveler.new password: password
+    reveler = build :reveler
     reveler.authenticate('')
     assert_nil reveler.last_login_at, 'Should not have recorded a login'
   end

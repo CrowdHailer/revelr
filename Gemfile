@@ -23,6 +23,7 @@ gem 'bcrypt'
 # Test requirements
 gem 'minitest', :require => 'minitest/autorun', :group => 'test'
 gem 'rack-test', :require => 'rack/test', :group => 'test'
+gem 'factory_girl', :group => 'test'
 
 # Padrino Stable Gem
 gem 'padrino', '0.12.4'
