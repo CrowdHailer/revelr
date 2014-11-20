@@ -12,6 +12,14 @@ class Owner < Hash
   def name
     fetch(:name)
   end
+
+  def work_contact_point=(work_contact_point)
+    self[:work_contact_point] = work_contact_point
+  end
+
+  def work_contact_point
+    fetch(:work_contact_point)
+  end
 end
 
 class Account < Sequel::Model(:accounts)
@@ -29,6 +37,14 @@ class Account < Sequel::Model(:accounts)
     set nu_hash
   end
 
+  def owner
+    Owner.new(name: name, work_contact_point: work_contact_point)
+  end
+
+  def work_contact_point
+    ContactPoint.new(email: work_email, telephone: work_telephone)
+  end
+
   def self.get_all_work_contacts
     all.map do |raw| 
       details = {
@@ -37,6 +53,10 @@ class Account < Sequel::Model(:accounts)
       }
       ContactPoint.new details
     end
+  end
+
+  def self.last_owner
+    last.owner
   end
 
 end

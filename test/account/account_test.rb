@@ -35,4 +35,16 @@ class AccountTest < UnitTest
     empty_account.update owner: owner
     assert_equal owner.name, Account.last.name
   end
+
+  def test_can_update_owner_with_work_contact_point
+    o = owner.merge(work_contact_point: contact_point)
+    empty_account.update owner: o
+    assert_equal telephone, Account.last.work_telephone
+  end
+
+  def test_get_compound_contact_point
+    o = owner.merge(work_contact_point: contact_point)
+    empty_account.update owner: o
+    assert_equal contact_point, Account.last_owner.work_contact_point
+  end
 end
