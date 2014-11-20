@@ -4,9 +4,9 @@ class Account < Sequel::Model(:accounts)
     self.guid = SecureRandom.uuid()
   end
 
-  def update_work_contact_point! contact_point
+  def work_contact_point=(contact_point)
     nu_hash = Hash[contact_point.map {|k, v| ["work_#{k}", v] }]
-    update nu_hash
+    set nu_hash
   end
 
   def self.get_all_work_contacts

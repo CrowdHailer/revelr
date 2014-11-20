@@ -6,6 +6,7 @@ Sequel.migration do
       String :home_email 
       String :work_telephone
       String :work_email
+      String :name
     end
   end
 

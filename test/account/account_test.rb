@@ -17,8 +17,8 @@ class AccountTest < UnitTest
     'pingu@south.org'
   end
 
-  def test_can_update_home_contacts
-    empty_account.update_work_contact_point! contact_point
+  def test_can_update_work_contact_point
+    empty_account.update work_contact_point: contact_point
     assert_equal({work_email: email, work_telephone: telephone}, Account.last.values.select{|k| k == :work_telephone || k == :work_email})
   end
 
