@@ -21,4 +21,9 @@ class AccountTest < UnitTest
     empty_account.update_work_contact_point! contact_point
     assert_equal({work_email: email, work_telephone: telephone}, Account.last.values.select{|k| k == :work_telephone || k == :work_email})
   end
+
+  def test_can_get_all_work_contacts
+    Account.create
+    assert_equal ContactPoint, Account.get_all_work_contacts.first.class
+  end
 end
