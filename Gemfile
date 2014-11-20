@@ -16,7 +16,7 @@ gem 'rake'
 # Component requirements
 gem 'sass'
 gem 'erubis', '~> 2.7.0'
-gem 'mysql2'
+gem 'sqlite3'
 gem 'sequel'
 gem 'bcrypt'
 gem 'money'
