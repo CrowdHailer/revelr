@@ -17,6 +17,10 @@ class AccountTest < UnitTest
     'pingu@south.org'
   end
 
+  def owner
+    Owner.new name: 'steve'
+  end
+
   def test_can_update_work_contact_point
     empty_account.update work_contact_point: contact_point
     assert_equal({work_email: email, work_telephone: telephone}, Account.last.values.select{|k| k == :work_telephone || k == :work_email})
@@ -25,5 +29,10 @@ class AccountTest < UnitTest
   def test_can_get_all_work_contacts
     Account.create
     assert_equal ContactPoint, Account.get_all_work_contacts.first.class
+  end
+
+  def test_can_update_owner
+    empty_account.update owner: owner
+    assert_equal owner.name, Account.last.name
   end
 end
