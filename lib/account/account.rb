@@ -46,13 +46,7 @@ class Account < Sequel::Model(:accounts)
   end
 
   def self.get_all_work_contacts
-    all.map do |raw| 
-      details = {
-        telephone: raw.work_telephone,
-        email: raw.work_email
-      }
-      ContactPoint.new details
-    end
+    all.map(&:work_contact_point)
   end
 
   def self.last_owner
