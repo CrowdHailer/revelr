@@ -1,9 +1,12 @@
-class ContactPoint < Hash
+class Thyng < Hash
   def initialize(args={})
     args.each{ |attribute, value|
       send("#{attribute}=", value)
     }
   end
+end
+
+class ContactPoint < Thyng
 
   def telephone=(telephone)
     self[:telephone] = telephone
