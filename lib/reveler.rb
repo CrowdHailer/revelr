@@ -1,32 +1,17 @@
-class Reveler < Hash
-  def initialize(args={})
-    args.each{ |attribute, value|
-      send("#{attribute}=", value)
-    }
-  end
+class Reveler < Thyng
+  value_accessor :credentials, initial: Credentials.new
 
-  def email
-    self.fetch(:email)
+  def initialize(*)
+    # self.credentials = Credentials.new
+    super
   end
 
   def email=(email)
-    self[:email] = email
+    credentials.email = email
   end
 
-  def password
-    BCrypt::Password.new crypted_password
-  end
-
-  def password=(password)
-    self.crypted_password = BCrypt::Password.create(password).to_s    
-  end
-
-  def authenticate(candidate)
-    check_password(candidate) && record_login
-  end
-
-  def last_login_at
-    self.fetch(:last_login_at, nil)
+  def email
+    credentials.email
   end
 
   def banned?
@@ -47,19 +32,4 @@ class Reveler < Hash
     self[:banned] = value
   end
 
-  def crypted_password
-    self.fetch(:crypted_password)
-  end
-
-  def crypted_password=(crypted_password)
-    self[:crypted_password] = crypted_password
-  end
-
-  def check_password(candidate)
-    password == candidate
-  end
-
-  def record_login
-    self[:last_login_at] = DateTime.now
-  end
 end
