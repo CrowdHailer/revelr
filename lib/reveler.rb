@@ -1,8 +1,8 @@
 class Reveler < Thyng
-  value_accessor :credentials
+  value_accessor :credentials, initial: Credentials.new
 
   def initialize(*)
-    self.credentials = Credentials.new
+    # self.credentials = Credentials.new
     super
   end
 

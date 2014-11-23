@@ -5,9 +5,16 @@ class Thyng < Hash
     }
   end
 
-  def self.value_accessor(attribute)
+  def self.value_accessor(attribute, options={})
+
     define_method attribute do
-      fetch(attribute)
+      if options.has_key? :initial
+        fetch attribute do
+          self[attribute] = options[:initial]
+        end
+      else
+        fetch(attribute)
+      end
     end
 
     define_method "#{attribute}=", ->(value) {
