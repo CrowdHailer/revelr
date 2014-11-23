@@ -1,6 +1,6 @@
 Sequel.migration do
   up do
-    create_table :accounts do
+    create_table :owners do
       primary_key :guid, :type => :varchar, :auto_increment => false, :unique => true
       String :home_telephone
       String :home_email 
@@ -11,6 +11,6 @@ Sequel.migration do
   end
 
   down do
-    drop_table :accounts
+    drop_table :owners
   end
 end

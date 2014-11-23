@@ -1,6 +1,6 @@
 require_relative '../test_config'
 
-class AccountTest < UnitTest
+class OwnerTest < UnitTest
   def empty_account
     Account.create
   end
