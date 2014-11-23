@@ -1,6 +1,25 @@
 class Owner < Thyng
   value_accessor :name
   value_accessor :guid
+  value_accessor :work_location
+  value_accessor :home_location
+end
+
+module Compounds
+  def compound(item, options={})
+    define_method "#{item}=", ->(thyng) {
+      set self.class.prefix_hash(thyng, options[:prefix])
+    }
+
+    define_method item, -> {
+      nu = Hash[values.select{|k,v| k.to_s.split('_')[0] == options[:prefix] }.map { |k, v| [k.to_s.sub(/^[^_]*_/,''),v] }]
+      options[:class].new nu
+    }
+  end
+
+  def prefix_hash(hash, prefix)
+    Hash[hash.map {|k, v| ["#{prefix}_#{k}", v] }]
+  end
 end
 
 class Owner
@@ -13,6 +32,18 @@ class Owner
     def self.save owner
       record = new.set(owner).save
       owner.guid = record.guid
+    end
+
+    extend Compounds
+    compound :work_location, prefix: 'work', class: ContactPoint
+    compound :home_location, prefix: 'home', class: ContactPoint
+
+    def owner
+      Owner.new(name: name, work_location: work_location, home_location: home_location)
+    end
+
+    def self.last_owner
+      last.owner
     end
   end
 end

@@ -28,6 +28,24 @@ class OwnerTest < UnitTest
     assert owner.guid, 'Owner should have id'
   end
 
+  def test_can_save_work_location
+    owner = Owner.new work_location: contact_point
+    Owner::Record.save owner
+    assert_equal telephone, Owner::Record.last.work_telephone
+  end
+
+  def test_loads_owner
+    owner = Owner.new name: 'kevin', work_location: contact_point
+    Owner::Record.save owner
+    assert_equal telephone, Owner::Record.last_owner.work_location.telephone
+  end
+
+  def test_loads_owner
+    owner = Owner.new name: 'kevin', home_location: contact_point
+    Owner::Record.save owner
+    assert_equal telephone, Owner::Record.last_owner.home_location.telephone
+  end
+
   def test_can_get_all_work_contacts
     skip
     Account.create
