@@ -1,16 +1,9 @@
 require './lib/thyng/thyng'
 
 class Credentials < Thyng
+  extend Thyng::CryptedRecord
   value_accessor :email
-  value_accessor :crypted_password
-
-  def password
-    BCrypt::Password.new crypted_password
-  end
-
-  def password=(password)
-    self.crypted_password = BCrypt::Password.create(password).to_s    
-  end
+  crypted_accessor :password
 
   def authenticate(candidate)
     check_password(candidate) && record_login
@@ -21,10 +14,6 @@ class Credentials < Thyng
   end
 
   private
-
-  def check_password(candidate)
-    password == candidate
-  end
 
   def record_login
     self[:last_login_at] = DateTime.now

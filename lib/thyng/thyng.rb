@@ -15,3 +15,24 @@ class Thyng < Hash
     }
   end
 end
+
+class Thyng < Hash
+  module CryptedRecord
+    def crypted_accessor(attribute)
+      crypted_attribute = "crypted_#{attribute}".to_sym
+      value_accessor crypted_attribute
+
+      define_method attribute do
+        BCrypt::Password.new send(crypted_attribute)
+      end
+
+      define_method "#{attribute}=", ->(value) {
+        send "#{crypted_attribute}=", BCrypt::Password.create(value).to_s
+      }
+
+      define_method "check_#{attribute}", ->(test_value) {
+        send(attribute) == test_value
+      }
+    end
+  end
+end
