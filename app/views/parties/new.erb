@@ -1,0 +1,11 @@
+<form class="pure-form" action="/parties" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= session[:csrf] %>">
+    <fieldset>
+        <legend>A compact inline form</legend>
+
+        <input type="date" name="party[start_datetime]">
+        <input type="date" name="party[finish_datetime]">
+
+        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+    </fieldset>
+</form>
