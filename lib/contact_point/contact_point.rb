@@ -1,6 +1,4 @@
-require './lib/thyng/thyng'
-
 class ContactPoint < Thyng
-  value_accessor :telephone
-  value_accessor :email
+  aspect_accessor :telephone
+  aspect_accessor :email
 end

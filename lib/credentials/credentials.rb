@@ -1,12 +1,11 @@
-require './lib/thyng/thyng'
-
+require 'thyng/crypted_aspect'
 class Credentials < Thyng
-  extend Thyng::CryptedRecord
-  value_accessor :email
+  extend Thyng::CryptedAspect
+  aspect_accessor :email
   crypted_accessor :password
 
   def authenticate(candidate)
-    check_password(candidate) && record_login
+    check_password?(candidate) && record_login
   end
 
   def last_login_at

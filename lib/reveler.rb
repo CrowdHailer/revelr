@@ -1,35 +1,35 @@
-class Reveler < Thyng
-  value_accessor :credentials, initial: Credentials.new
+# class Reveler < Thyng
+#   value_accessor :credentials, initial: Credentials.new
 
-  def initialize(*)
-    # self.credentials = Credentials.new
-    super
-  end
+#   def initialize(*)
+#     # self.credentials = Credentials.new
+#     super
+#   end
 
-  def email=(email)
-    credentials.email = email
-  end
+#   def email=(email)
+#     credentials.email = email
+#   end
 
-  def email
-    credentials.email
-  end
+#   def email
+#     credentials.email
+#   end
 
-  def banned?
-    self.fetch(:banned, false)
-  end
+#   def banned?
+#     self.fetch(:banned, false)
+#   end
 
-  def ban
-    self.banned = true
-  end
+#   def ban
+#     self.banned = true
+#   end
 
-  def unban
-    self.banned = false
-  end
+#   def unban
+#     self.banned = false
+#   end
 
-  private
+#   private
 
-  def banned=(value)
-    self[:banned] = value
-  end
+#   def banned=(value)
+#     self[:banned] = value
+#   end
 
-end
+# end

@@ -20,6 +20,7 @@ gem 'sqlite3'
 gem 'sequel'
 gem 'bcrypt'
 gem 'money'
+gem 'thyng', '0.1.0'
 
 # Test requirements
 gem 'minitest', :require => 'minitest/autorun', :group => 'test'
