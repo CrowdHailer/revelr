@@ -21,6 +21,8 @@ gem 'sequel'
 gem 'bcrypt'
 gem 'money'
 gem 'thyng', '0.1.0'
+gem 'virtus'
+gem 'veto'
 
 # Test requirements
 gem 'minitest', :require => 'minitest/autorun', :group => 'test'
