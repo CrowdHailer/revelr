@@ -1,7 +1,7 @@
 Revelr::App.controllers :parties do
   
   get :index do
-    # @parties = Party.all
+    @parties = Party::Repo.all
     render :'parties/index'
   end
 
@@ -10,13 +10,14 @@ Revelr::App.controllers :parties do
   end
 
   post :create, :map => '/parties' do
-    puts params
-    puts self
     form = Party::DetailsForm.new params[:party]
     validator = Party::DetailsForm::Validator.new
-    puts form.timetable
-    puts validator.valid?(form)
-    puts validator.errors
+
+    party = Party.new form.to_hash
+    puts party
+    Party::Repo.save party
+    puts 'yarp'
+    puts Party::Repo.first
     redirect to('/parties')
   end
 
