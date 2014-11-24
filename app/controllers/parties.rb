@@ -11,8 +11,12 @@ Revelr::App.controllers :parties do
 
   post :create, :map => '/parties' do
     puts params
+    puts self
     form = Party::DetailsForm.new params[:party]
+    validator = Party::DetailsForm::Validator.new
     puts form.timetable
+    puts validator.valid?(form)
+    puts validator.errors
     redirect to('/parties')
   end
 
