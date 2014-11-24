@@ -11,6 +11,8 @@ Revelr::App.controllers :parties do
 
   post :create, :map => '/parties' do
     puts params
+    form = Party::DetailsForm.new params[:party]
+    puts form.timetable
     redirect to('/parties')
   end
 
