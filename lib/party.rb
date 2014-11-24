@@ -1,3 +1,6 @@
+class Party < Thyng
+  aspect_accessor :timetable
+end
 # class Party < Hash
 #   def initialize(args={})
 #     args.each{ |attribute, value|
